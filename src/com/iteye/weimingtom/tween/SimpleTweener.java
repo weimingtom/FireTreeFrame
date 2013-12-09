@@ -34,10 +34,15 @@ public abstract class SimpleTweener {
 	public boolean update() {
 		if (isStarted) {
 			if (enableTimeCheck) {
-				if (this.currentTime >= this.totoalTime) {
+				if (this.currentTime > this.totoalTime) {
 					this.isStarted = false;
 					this.cx = this.cy = 0;
 					return false;
+				} else if (this.currentTime == this.totoalTime) {
+					this.cx = this.x + this.dx;
+					this.cy = this.y + this.dy;
+					++this.currentTime;
+					return true;
 				} else {
 					this.cx = interpolator(currentTime, x, dx, totoalTime);
 					this.cy = interpolator(currentTime, y, dy, totoalTime);
